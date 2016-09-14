@@ -1,0 +1,61 @@
+<?php
+/**
+* Implements hook_menu().
+*/
+function dss_betamessage_menu() {
+  $items = array();
+  $items['admin/config/user-interface/dss-betamessage'] = array(
+    'title' => 'DSS Beta Message',
+    'description' => 'Configuration for the DSS Beta Message module.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('dss_betamessage_form'),
+    'access arguments' => array('administer blocks'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  return $items;
+}
+
+/**
+* Form builder
+*/
+function dss_betamessage_form($form, &$form_state) {	
+  $dss_betamessage_settings = variable_get('dss_betamessage_settings');
+  $form['messagewords'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Beta message words'),
+    '#default_value' => t($dss_betamessage_settings['messagewords']),
+    '#rows' => 4,
+    '#cols' => 60,		
+  );
+  // Submit button
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save settings')
+  );  
+  return $form;
+}
+
+/**
+* Save configuration settings
+*/
+function dss_betamessage_form_submit($form, &$form_state) {
+  $dss_betamessage_settings = array(
+    'messagewords' => $form_state['values']['messagewords'],
+  );	
+  variable_set('dss_betamessage_settings',$dss_betamessage_settings);
+  drupal_set_message(t('The settings have been saved'));
+}
+
+/**
+ * Implements hook_page_build().
+ */
+function dss_betamessage_page_build(&$page) {	
+  $dss_betamessage_settings = variable_get('dss_betamessage_settings');
+  $page['page_bottom']['betamessage'] = array(
+    '#weight' => 25, 
+    '#markup' => '<p class="betamessage">' . $dss_betamessage_settings['messagewords'] . '<a href="#" class="betamessage-close">Close</a></p>',
+  );
+  drupal_add_css(drupal_get_path('module', 'dss_betamessage') . '/betamessage.css', array('group' => CSS_THEME, 'type' => 'file', 'preprocess' => TRUE));
+  drupal_add_js(drupal_get_path('module', 'dss_betamessage') . '/betamessage.js', array('group' => JS_DEFAULT, 'type' => 'file', 'scope'=>'footer', 'preprocess' => TRUE));	
+}
+

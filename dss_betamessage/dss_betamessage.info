@@ -1,0 +1,9 @@
+name = DSS Beta Message
+description = Adds a dismissable message to the top of the page. To be used to display a customisable Beta website message on your website.
+package = DSS
+version = "7.x-1.0"
+core = 7.x
+configure = admin/config/user-interface/dss-betamessage
+files[] = dss_betamessage.module
+
+dependencies[] = block

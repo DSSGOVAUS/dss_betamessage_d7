@@ -1,0 +1,11 @@
+<?php
+function dss_betamessage_uninstall() {
+  variable_del('dss_betamessage_settings');
+}
+
+function dss_betamessage_install() {
+  $dss_betamessage_settings = array(
+    'messagewords' => 'We are building a new website. Help us make it better. <a href="/feedback">Tell us what you think</a>.',
+    );
+  variable_set('dss_betamessage_settings', $dss_betamessage_settings);
+}
