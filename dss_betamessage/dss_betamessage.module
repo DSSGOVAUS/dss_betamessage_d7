@@ -20,13 +20,21 @@ function dss_betamessage_menu() {
 */
 function dss_betamessage_form($form, &$form_state) {	
   $dss_betamessage_settings = variable_get('dss_betamessage_settings');
+
   $form['messagewords'] = array(
     '#type' => 'textarea',
     '#title' => t('Beta message words'),
     '#default_value' => t($dss_betamessage_settings['messagewords']),
     '#rows' => 4,
-    '#cols' => 60,		
+    '#cols' => 60,    
   );
+
+  $form['wrapper_element'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Selector for element to attach beta tag to'),
+    '#default_value' => t($dss_betamessage_settings['wrapper_element'])
+  );
+
   // Submit button
   $form['submit'] = array(
     '#type' => 'submit',
@@ -41,6 +49,7 @@ function dss_betamessage_form($form, &$form_state) {
 function dss_betamessage_form_submit($form, &$form_state) {
   $dss_betamessage_settings = array(
     'messagewords' => $form_state['values']['messagewords'],
+    'wrapper_element' => $form_state['values']['wrapper_element'],
   );	
   variable_set('dss_betamessage_settings',$dss_betamessage_settings);
   drupal_set_message(t('The settings have been saved'));
@@ -51,10 +60,12 @@ function dss_betamessage_form_submit($form, &$form_state) {
  */
 function dss_betamessage_page_build(&$page) {	
   $dss_betamessage_settings = variable_get('dss_betamessage_settings');
+
   $page['page_bottom']['betamessage'] = array(
     '#weight' => 25, 
-    '#markup' => '<p class="betamessage">' . $dss_betamessage_settings['messagewords'] . '<a href="#" class="betamessage-close">Close</a></p>',
+    '#markup' => '<div class="betamessage" data-attach-to="' . $dss_betamessage_settings["wrapper_element"] . '"><a href="#" class="betamessage-close">Close</a><div>' . $dss_betamessage_settings['messagewords'] . '</div></div>',
   );
+
   drupal_add_css(drupal_get_path('module', 'dss_betamessage') . '/betamessage.css', array('group' => CSS_THEME, 'type' => 'file', 'preprocess' => TRUE));
   drupal_add_js(drupal_get_path('module', 'dss_betamessage') . '/betamessage.js', array('group' => JS_DEFAULT, 'type' => 'file', 'scope'=>'footer', 'preprocess' => TRUE));	
 }
