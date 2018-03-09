@@ -1,19 +1,24 @@
 jQuery(function($) {
-	$(document).ready(function() {     
-		var wrapper_element = $('.betamessage').data("attach-to");
+	$(document).ready(function() {
+		var wrapper_element = $('.betamessage').data('attach-to');
 
-		$(wrapper_element).css("position", "relative");
-		$(wrapper_element).append('<a href="#" class="betamessage-tag betamessage-open">Beta</a>');
+		$(wrapper_element).css('position', 'relative');
+		$(wrapper_element).append('<a href="#" class="betamessage-tag betamessage-open" aria-label="Display beta message">Beta</span></a>');
 
-		if((typeof(Storage)!=="undefined") && (localStorage.getItem('betamessage') != 'closed')) {
+		if((typeof(Storage)!=='undefined') && (localStorage.getItem('betamessage') != 'closed')) {
 			// Show the message
-			$('.betamessage').css('display','block');
-		}            
+			if($('body').hasClass('front')) {
+			  $('.betamessage').slideDown(500);
+			}
+			else {
+				$('.betamessage').css('display','block');
+			}
+		}
 		// Clicks the Beta link
 		$('.betamessage-open').click(function(){
 			localStorage.setItem('betamessage', '');
 			$('.betamessage').slideDown(500);
-		});   
+		});
 		// Clicks the Close
 		$('.betamessage-close').click(function(){
 			$('.betamessage').slideUp(500);
