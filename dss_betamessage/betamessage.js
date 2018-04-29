@@ -3,7 +3,7 @@ jQuery(function($) {
 		var wrapper_element = $('.betamessage').data('attach-to');
 
 		$(wrapper_element).css('position', 'relative');
-		$(wrapper_element).append('<a href="#" class="betamessage-tag betamessage-open" aria-label="Display beta message">Beta</span></a>');
+		$(wrapper_element).append('<a href="#" class="betamessage-tag betamessage-open" aria-label="Display beta message">Beta</a>');
 
 		if((typeof(Storage)!=='undefined') && (localStorage.getItem('betamessage') != 'closed')) {
 			// Show the message
