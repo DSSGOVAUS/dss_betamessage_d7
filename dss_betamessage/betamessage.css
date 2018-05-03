@@ -22,6 +22,7 @@
 }
 .betamessage .betamessage-close {
 	float: right;
+	padding-right: 10px;
 }
 .betamessage-tag {
 	background-color: #d74100;
