@@ -63,7 +63,7 @@ function dss_betamessage_page_build(&$page) {
 
   $page['page_top']['betamessage'] = array(
     '#weight' => 25,
-    '#markup' => '<p class="betamessage" data-attach-to="' . $dss_betamessage_settings["wrapper_element"] . '"><span class="betamessage-text"><span class="betamessage-tag">Beta</span> &nbsp;' . $dss_betamessage_settings['messagewords'] . '</span><span class="betamessage-close"><a href="#" aria-label="Close beta message">Close</a></span></p>',
+    '#markup' => '<p class="betamessage" data-attach-to="' . $dss_betamessage_settings["wrapper_element"] . '"><span class="betamessage-text"><span class="betamessage-tag">Beta</span> &nbsp;' . $dss_betamessage_settings['messagewords'] . '</span><span class="betamessage-close"><a href="#" aria-label="Hide this beta message">Hide this</a></span></p>',
   );
 
   drupal_add_css(drupal_get_path('module', 'dss_betamessage') . '/betamessage.css', array('group' => CSS_THEME, 'type' => 'file', 'preprocess' => TRUE));
