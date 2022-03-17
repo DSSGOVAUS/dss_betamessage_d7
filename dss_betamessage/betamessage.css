@@ -10,15 +10,22 @@
 	text-align: center;
 	z-index: 999;
 }
+
+.betamessage.hide-beta .betamessage-tag {
+	display: none;
+}
+
 .betamessage .betamessage-text {
 	margin: 0 80px;
 }
 .betamessage a {
 	color: #fff;
+	font-weight:bold;
+	text-decoration: underline;
 }
 .betamessage a:hover,
 .betamessage a:focus {
-	color: #f05900;
+	text-decoration: none;
 }
 .betamessage .betamessage-close {
 	float: right;
@@ -43,6 +50,15 @@ a.betamessage-open:hover,
 a.betamessage-open:focus {
 	text-decoration: underline !important;
 }
+
+.betamessage.black-text {
+	color:#000;
+}
+
+.betamessage.black-text a {
+	color:#000;
+}
+
 @media screen and (max-width: 780px) {
   .betamessage .betamessage-close {
 		display: block;
